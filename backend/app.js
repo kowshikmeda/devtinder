@@ -11,6 +11,21 @@ app.use(express.json());
 app.get('/',(req,res)=>{
     res.send("Hello World");
 });
+
+app.get("/user",async(req,res)=>{
+    try{
+      const {emailId:userEmail}=req.body; 
+      const userdata=await User.find({emailId:userEmail});
+      if(userdata.length==0){
+          res.send("No user found");
+      }else{
+        res.send(userdata);
+      }
+     
+    }catch(err){
+      res.send(err.message);
+    }
+})
 app.post("/signup",async(req,res)=>{
     try{
         const {firstName,lastName,emailId,password,age}=req.body;
@@ -31,6 +46,62 @@ app.post("/signup",async(req,res)=>{
 app.get("/login",(req,res)=>{
     console.log("from login");
     res.json({message:"from login"});  
+})
+
+app.get("/feed",async(req,res)=>{
+    try{
+    const userdata=await User.find({});
+    if(userdata.length==0){
+        res.send("No user found");
+    }else{
+      res.send(userdata);
+    }
+}
+  catch(err){
+    res.send(err.message);
+  }
+
+})
+
+app.delete("/user",async(req,res)=>{
+    const userId=req.body.userId;
+    try{
+        const user=await User.findByIdAndDelete(userId);
+        //const user=await User.findByIdAndDelete(_id:userId);
+        if(user){
+            res.send("User deleted successfully");
+        }
+        else{
+            res.send("User not found");
+        }
+    }catch(err){
+        res.send(err.message); 
+    }
+})
+
+app.patch("/user/:userId",async(req,res)=>{
+    const {userId}=req.params;
+    const data=req.body;
+    try{
+        const ALLOWEDUPDATES=["photoUrl","about","gender","skills"];
+        const isUpdateAllowed=object.keys(data).every((k)=>ALLOWEDUPDATES.includes(k));
+        if(!isUpdateAllowed){
+            throw new Error("Update is not allowed");
+        }
+        if(data?.skills.length>10){
+            throw new Error("Skills should be not more than 10");
+        }
+        const user= await User.findByIdAndUpdate({_id:userId},data,
+            //{returnDocument:"before"});
+            {returnDocument:"after",
+                runValidators:true,
+            }); 
+            console.log(user);
+        res.send("updated successfully"+user);
+
+    }catch(err){
+        res.send(err.message); 
+    }
 })
 
 connectDB().then(()=>{

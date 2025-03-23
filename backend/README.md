@@ -42,3 +42,30 @@
 -Create a userSchema & userModel
 -Create a POST /signup API to add data to database
 -Push some documents via API calls with Postman
+-Error handling using try,catch
+
+-JS object vs JSON(difference)
+-Add the express.json() middleware to your app
+-Make your /signup API dynamic to receive data from the end user
+-User.findOne() with duplicate emailIds,which object will returned
+-API get user by  emailId
+-API get feed -get all users from database
+-API get user by ID
+-Delete a userAPI
+-Difference between PATCH and PUT
+-Update a user API
+-Explore the mongoose documentation for models methods
+-What are options in model.findOneAndUpdate method,explore about it
+-API update user by emailId
+
+-Explore schemaTypes options in documentation
+-add required,unique,lowercase,min,max,minLength,maxLength
+-Add default
+-create a custom validator for gender
+-Improve the DB schema - put all apprioriate validations on each fields in schema
+-Add timestamps to Userschema
+-Add API validation on PATCH request & signup POST API
+-Data Sanitization-Add API validation on each field
+-Install validator
+-Explore validator library function and use validatorfunctions for email,password,photourl
+-Never Trust req.body
