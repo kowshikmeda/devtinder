@@ -1,5 +1,7 @@
+const jwt= require("jsonwebtoken");
 const mongoose=require("mongoose");
 const validator=require("validator");
+const bcrypt=require("bcrypt");
 const userSchema=new mongoose.Schema({
     firstName:{
         type:String,
@@ -45,7 +47,7 @@ const userSchema=new mongoose.Schema({
     },
     photoUrl:{
         type:String,
-        default:"url",
+        default:"https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small_2x/user-profile-icon-free-vector.jpg",
         validate(value){
             if(!validator.isURL(value)){
                 throw new Error("Incorrect photo  url"+value);
@@ -64,6 +66,22 @@ const userSchema=new mongoose.Schema({
    }, {
     timestamps:true,
 });
+
+userSchema.methods.getJWT= async function(){
+    const user=this;
+    const token=await jwt.sign({_id:user._id},"dev",{expiresIn:"7d"});
+    return token;
+}
+
+
+userSchema.methods.validatePassword= async function(passwordInputByUser){
+    const user=this;
+    console.log("user",user);
+    const passwordHash=user.password
+     const isPasswordValid=await bcrypt.compare(passwordInputByUser,passwordHash);
+    return isPasswordValid;
+}
+
 
 const User=mongoose.model("User",userSchema);
 
