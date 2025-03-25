@@ -112,3 +112,15 @@
 -Why do we need indexing?advantages and disadvantages of crating it?
 -Read the article about compound indexes
 - Always Think about CORNER CASES 
+
+
+-Write code with proper validation for the POST /request/review/:status/:requestId API
+-Thought process of POST Vs GET
+-Read about ref and populate
+-Create a GET /user/requests/recieved with all checks
+-Create a GET /user/connections 
+
+-Create a GET /feed API
+-Explore $nin,$ne,$and and other query operators
+-Pagination 
+

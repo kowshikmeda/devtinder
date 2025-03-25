@@ -12,7 +12,7 @@ profileRouter.get("/profile/view",userAuth,async(req,res)=>{
         res.send(user)
     
 }catch(err){
-    res.send(err.message);
+    res.status(400).send(err.message);
 }
    
 
@@ -25,7 +25,7 @@ profileRouter.patch("/profile/edit",userAuth,async(req,res)=>{
        throw new Error("Invalid edit request");
      }
      const loggedInUser=req.user;
-     console.log(loggedInUser);
+   
      Object.keys(req.body).forEach((key)=>{
          loggedInUser[key]=req.body[key];
      });
@@ -34,7 +34,7 @@ profileRouter.patch("/profile/edit",userAuth,async(req,res)=>{
             data:loggedInUser}
         );
     }catch(err){
-        res.send(err.message);
+        res.status(400).send(err.message);
     }
 })
 

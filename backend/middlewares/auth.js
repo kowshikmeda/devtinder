@@ -19,7 +19,7 @@ const userAuth=async(req,res,next)=>{
   
 
     }catch(err){
-        res.send(err.message);
+        res.status(400).send(err.message);
     }
 
 }
