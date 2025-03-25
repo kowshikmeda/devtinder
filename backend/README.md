@@ -97,3 +97,18 @@
 -Create a routes folder for managing auth,profile,request router
 -Create authRouter,profileRouter,requestRouter
 -Import these routers in app.js
+-Create POST /logout API
+-Create a PATCH /profile/edit API
+-Create a PATCH /profile/password API -forgot password
+-Make you validate all data in every PUT,POST,PATCH API'S
+
+-Create ConnectionRequest Schema
+-Create connectionRequest send API
+-Proper validation of data
+-Think about all corner cases
+-$or and $and query
+-Schema.pre("save") function
+-Read more about indexes
+-Why do we need indexing?advantages and disadvantages of crating it?
+-Read the article about compound indexes
+- Always Think about CORNER CASES 
