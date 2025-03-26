@@ -124,3 +124,9 @@
 -Explore $nin,$ne,$and and other query operators
 -Pagination 
 
+ /feed?page=1&limit=10 => first 1-10
+ /feed?page=2&limit=10 => first 11-20
+ /feed?page=3&limit=10 => first 21-30
+ .skip(),.limit()
+ skip=(page-1)*limit;
+
