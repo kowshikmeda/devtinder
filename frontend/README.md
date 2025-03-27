@@ -20,6 +20,10 @@
 -Login and see if your data is properly coming to the store
 -Navbar should update as soon as user login in
 -Refactor our code to add constant file + create componente folder
+-You should not use other routes without login
+-If the token is not present then redirect to login
+-Logout
+-Build user card on feed
 
 -body
   Navbar
