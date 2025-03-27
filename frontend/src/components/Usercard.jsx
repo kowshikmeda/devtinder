@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Usercard = ({user}) => {
-    console.log("user feed:",user);
+    //console.log("user feed:",user);
     const {firstName,age,lastName,gender,about,photoUrl}=user;
   return (
     <div><div className="card bg-base-300 w-96 shadow-sm">

@@ -23,7 +23,14 @@
 -You should not use other routes without login
 -If the token is not present then redirect to login
 -Logout
+-Get the feed and add the feed in the store
 -Build user card on feed
+-Edit profile Feature
+-Show toast message on save profile
+-New page-See all connections
+-New page-See all connection requests
+-Feature : Accepted/Rejected a connectionRequest 
+
 
 -body
   Navbar
