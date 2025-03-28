@@ -29,7 +29,10 @@
 -Show toast message on save profile
 -New page-See all connections
 -New page-See all connection requests
--Feature : Accepted/Rejected a connectionRequest 
+-Feature : Accepted/Rejected a connectionRequest
+-Send/Ignore the user card from feed 
+-Signup the new user
+-E2E testing
 
 
 -body

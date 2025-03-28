@@ -44,7 +44,7 @@ const Requests = () => {
         {requests.map((request)=>{
           const {firstName,lastName,age,gender,photoUrl,about,_id}=request.fromUserId;
          return (
-         <div  key={_id} className='m-4 rounded-lg bg-base-300 p-4 flex items-center justify-between w-1/2 mx-auto'>
+         <div  key={_id} className='m-4 rounded-lg bg-base-300 p-4 flex items-center justify-between  mx-auto'>
           <div> <img src={photoUrl} className='w-20 h-20 rounded-full' alt='photo'/></div>
           <div className='text-left mx-4'> 
             <h2 className='font-bold text-xl'> {firstName+" "+lastName}</h2> 
@@ -54,10 +54,10 @@ const Requests = () => {
           </div>
          
             <div >
-                <button className='btn btn-primary mx-2' 
+                <button className='btn btn-primary m-2' 
                 onClick={()=>reviewRequests("rejected",request._id)}>
                     Rejected</button>
-                <button className='btn btn-secondary mx-2'
+                <button className='btn btn-secondary m-2'
                  onClick={()=>reviewRequests("accepted",request._id)}
                 >Accepted
                 </button>
