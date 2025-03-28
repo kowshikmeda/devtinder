@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 const express=require('express');
 const app=express();
-require('dotenv').config();
+
 
 //console.log(process.env.MONGODB_URL);
 const connectDB=async()=>{
