@@ -11,7 +11,7 @@ const requestRouter = require('./routes/request');
 const userRouter = require('./routes/user');
 dotenv.config();
 app.use(cors({
-    origin: ["http://localhost:5173", "https://devtinder-k8t8.onrender.com"],
+    origin: ["http://localhost:5173", "https://devtinder-oelc.onrender.com"],
     credentials: true
 }));
 
