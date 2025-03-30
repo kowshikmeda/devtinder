@@ -17,6 +17,13 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
+
+app.use("/",authRouter);
+app.use("/",profileRouter);
+app.use("/",requestRouter);
+app.use("/",userRouter);
+
+let port=process.env.PORT;
 if(process.env.MODE==="production"){
     app.use(express.static(path.join(__dirname,"../frontend/dist")))
     app.get("*",(req,res)=>{
@@ -24,13 +31,6 @@ if(process.env.MODE==="production"){
     })
 
 }
-app.use("/",authRouter);
-app.use("/",profileRouter);
-app.use("/",requestRouter);
-app.use("/",userRouter);
-
-let port=process.env.PORT;
-
 connectDB().then(()=>{
     app.listen(port,()=>{   
         console.log(`Server is running on ${port} `);
