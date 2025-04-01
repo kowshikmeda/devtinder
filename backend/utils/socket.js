@@ -22,52 +22,48 @@ const initializeSocket = (server) => {
 
   io.on("connection", (socket) => {
     // ✅ User joins chat and becomes online
-    socket.on("joinChat", ({ firstName, userId }) => {
-      onlineUsers.set(userId, socket.id); // ✅ Store user as online
-      io.emit("userOnline", { userId }); // ✅ Notify all clients
-
-      console.log("User joined:", firstName, userId);
+    socket.on("joinChat", ({ firstName, userId, targetUserId }) => {
+      onlineUsers.set(userId, socket.id);
+      io.emit("userOnline", { userId });
+      
+      const roomId = getSecretRoomId(userId, targetUserId);
+      socket.join(roomId); // ✅ Ensure the user joins the chat room
+      
+      console.log(`${firstName} joined chat with ${targetUserId} in room ${roomId}`);
     });
-
-    // ✅ Handle sending messages only if users are friends
+    
     socket.on("sendMessage", async ({ firstName, lastName, userId, targetUserId, text }) => {
       try {
         const roomId = getSecretRoomId(userId, targetUserId);
-
+    
         const isFriends = await ConnectionRequest.findOne({
           $or: [
             { fromUserId: userId, toUserId: targetUserId, status: "accepted" },
             { fromUserId: targetUserId, toUserId: userId, status: "accepted" }
           ]
         });
-
+    
         if (!isFriends) {
           io.to(socket.id).emit("errorMessage", { message: "You are not friends. Messages can't be sent." });
           return;
         }
-
+    
         let chat = await Chat.findOne({ participants: { $all: [userId, targetUserId] } });
-
+    
         if (!chat) {
-          chat = new Chat({
-            participants: [userId, targetUserId],
-            messages: [],
-          });
+          chat = new Chat({ participants: [userId, targetUserId], messages: [] });
         }
-
-        chat.messages.push({
-          senderId: userId,
-          text
-        });
-
+    
+        chat.messages.push({ senderId: userId, text });
         await chat.save();
-
-        io.to(roomId).emit("messageReceived", { firstName, lastName, text });
-
+    
+        io.to(roomId).emit("messageReceived", { firstName, lastName, text }); // ✅ Broadcast message to room
+    
       } catch (err) {
         console.error("Message error:", err);
       }
     });
+    
 
     // ✅ Handle user disconnection
     socket.on("disconnect", () => {
