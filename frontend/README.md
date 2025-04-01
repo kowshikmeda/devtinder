@@ -42,4 +42,12 @@
    route=/profile => Profile
    route=/connections => Connections
 
-
+#Real time chat using websocket(socket.io)
+ -Build UI for for chat window for /chat/:targetUserId
+ -Setup socket.io in backend
+ -npm i socket.io
+ -Setup frontend socket.io-client
+ -Intialize the chat
+ -create a socketconnection
+ -Listen to events
+ 

@@ -9,6 +9,9 @@ const authRouter = require('./routes/auth');
 const profileRouter = require('./routes/profile');
 const requestRouter = require('./routes/request');
 const userRouter = require('./routes/user');
+const http=require("http");
+const intializeSocket = require('./utils/socket');
+const chatRouter = require('./routes/chat');
 dotenv.config();
 app.use(cors({
     origin: ["http://localhost:5173", "https://devtinder-oelc.onrender.com"],
@@ -22,7 +25,7 @@ app.use("/",authRouter);
 app.use("/",profileRouter);
 app.use("/",requestRouter);
 app.use("/",userRouter);
-
+app.use("/",chatRouter);
 let port=process.env.PORT;
 if(process.env.MODE==="production"){
     app.use(express.static(path.join(__dirname,"../frontend/dist")))
@@ -31,8 +34,10 @@ if(process.env.MODE==="production"){
     })
 
 }
+const server=http.createServer(app);
+intializeSocket(server);
 connectDB().then(()=>{
-    app.listen(port,()=>{   
+    server.listen(port,()=>{   
         console.log(`Server is running on ${port} `);
     });
 }).catch((err)=>{

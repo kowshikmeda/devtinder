@@ -3,10 +3,12 @@ import React, { useEffect } from 'react'
 import { BASE_URL } from '../../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addConnections } from '../../utils/connectionSlice'
+import { Link } from 'react-router-dom'
 
 const Connections = () => {
   const dispatch=useDispatch();
   const connections=useSelector((store)=>store?.connections)
+  
   const fetchConnections=async()=>{
     try{
       const res=await axios.get(BASE_URL+"/user/connections",{withCredentials:true})
@@ -37,7 +39,7 @@ const Connections = () => {
         <p>{about}</p>
         
         </div>
-       
+        <Link to={"/chat/"+_id}><button className='btn btn-secondary'>Chat</button></Link> 
 
          
           </div>)
