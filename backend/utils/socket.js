@@ -57,7 +57,7 @@ const initializeSocket = (server) => {
         chat.messages.push({ senderId: userId, text });
         await chat.save();
     
-        io.to(roomId).emit("messageReceived", { firstName, lastName, text }); // ✅ Broadcast message to room
+        io.to(roomId).emit("messageReceived", {  senderId: userId,firstName, lastName, text }); // ✅ Broadcast message to room
     
       } catch (err) {
         console.error("Message error:", err);
