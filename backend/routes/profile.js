@@ -4,7 +4,7 @@ const User=require("../models/user");
 const {userAuth}=require("../middlewares/auth");
 const {validEditProfileData}=require("../utils/validation");
 
-profileRouter.get("/profile/view",userAuth,async(req,res)=>{
+profileRouter.get("/view",userAuth,async(req,res)=>{
 
     try{
     

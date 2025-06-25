@@ -20,12 +20,13 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
-
+app.use("/chat",chatRouter);
+app.use("/profile",profileRouter);
 app.use("/",authRouter);
-app.use("/",profileRouter);
+
 app.use("/",requestRouter);
 app.use("/",userRouter);
-app.use("/",chatRouter);
+
 let port=process.env.PORT;
 if(process.env.MODE==="production"){
     app.use(express.static(path.join(__dirname,"../frontend/dist")))
